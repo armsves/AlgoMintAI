@@ -21,6 +21,7 @@ if (process.env.VITE_ALGOD_NETWORK === 'localnet') {
     { id: WalletId.DEFLY },
     { id: WalletId.PERA },
     { id: WalletId.EXODUS },
+    { id: WalletId.LUTE },
   ]
 }
 

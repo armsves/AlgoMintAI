@@ -1,9 +1,11 @@
 import { useWallet, Wallet, WalletId } from '@txnlab/use-wallet-react'
 import Account from './Account'
+import Image from 'next/image'
 
 interface ConnectWalletInterface {
   openModal: boolean
   closeModal: () => void
+  hideClose?: boolean
 }
 
 const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
@@ -16,15 +18,17 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
 
   return (
     <div
-      className="bg-white border rounded shadow-lg min-w-[260px] p-4"
+      className="p-6 bg-gray rounded-xl shadow-lg min-w-[280px] border border-indigo-100"
       onClick={e => e.stopPropagation()}
     >
-      <h3 className="font-bold text-lg mb-2">Select wallet provider</h3>
-      <div className="grid m-2 pt-2">
+      <h3 className="font-bold text-lg mb-4 text-indigo-700">Select wallet provider</h3>
+      <div className="grid gap-3 mb-4">
         {activeAddress && (
           <>
-            <Account />
-            <div className="divider" />
+            <div className="bg-indigo-50 rounded-lg p-3 mb-2">
+              <Account />
+            </div>
+            <hr className="my-2 border-indigo-200" />
           </>
         )}
 
@@ -33,7 +37,7 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
             <button
               type="button"
               data-test-id={`${wallet.id}-connect`}
-              className="btn border-teal-800 border-1 m-2"
+              className="flex items-center gap-2 border border-indigo-200 rounded-lg px-3 py-2 hover:bg-indigo-100 transition m-0"
               key={`provider-${wallet.id}`}
               onClick={e => {
                 e.preventDefault()
@@ -42,32 +46,23 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
               }}
             >
               {!isKmd(wallet) && (
-                <img
+                <Image
                   alt={`wallet_icon_${wallet.id}`}
                   src={wallet.metadata.icon}
-                  style={{ objectFit: 'contain', width: '30px', height: 'auto' }}
+                  width={28}
+                  height={28}
+                  style={{ objectFit: 'contain' }}
                 />
               )}
-              <span>{isKmd(wallet) ? 'LocalNet Wallet' : wallet.metadata.name}</span>
+              <span className="font-medium text-indigo-800">{isKmd(wallet) ? 'LocalNet Wallet' : wallet.metadata.name}</span>
             </button>
           ))}
       </div>
-      <div className="flex justify-end gap-2 mt-2">
-        <button
-          type="button"
-          data-test-id="close-wallet-modal"
-          className="btn"
-          onClick={e => {
-            e.preventDefault()
-            closeModal()
-          }}
-        >
-          Close
-        </button>
-        {activeAddress && (
+      {activeAddress && (
+        <div className="flex justify-end pt-2">
           <button
             type="button"
-            className="btn btn-warning"
+            className="text-red-600 hover:text-red-800 font-bold px-3 py-1 rounded transition"
             data-test-id="logout"
             onClick={async e => {
               e.preventDefault()
@@ -85,8 +80,8 @@ const ConnectWallet = ({ openModal, closeModal }: ConnectWalletInterface) => {
           >
             Logout
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

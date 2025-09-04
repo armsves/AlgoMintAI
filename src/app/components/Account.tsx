@@ -13,10 +13,17 @@ const Account = () => {
 
   return (
     <div>
-      <a className="text-xl" target="_blank" href={`https://lora.algokit.io/${networkName}/account/${activeAddress}/`}>
+      <a
+        className="text-xl text-gray-900 font-mono font-semibold"
+        target="_blank"
+        href={`https://lora.algokit.io/${networkName}/account/${activeAddress}/`}
+        rel="noopener noreferrer"
+      >
         Address: {ellipseAddress(activeAddress)}
       </a>
-      <div className="text-xl">Network: {networkName}</div>
+      <div className="text-xl text-gray-800 font-semibold">
+        Network: {networkName}
+      </div>
     </div>
   )
 }
