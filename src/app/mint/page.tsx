@@ -9,7 +9,7 @@ import { getAlgodConfigFromViteEnvironment } from '@/utils/network/getAlgoClient
 import axios from "axios";
 
 export default function MintNFT() {
-  const [collectionName, setCollectionName] = useState<string>("MasterPass");
+  const [collectionName, setCollectionName] = useState<string>("Cute Cats");
   const [prompt, setPrompt] = useState<string>("A cute orange cat ghibli style");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [metadataUrl, setMetadataUrl] = useState<string>("");
