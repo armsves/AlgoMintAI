@@ -138,8 +138,10 @@ export async function POST(req: NextRequest) {
     console.log("STEP 7.1: Uploaded to IPFS, hash:", imageIpfsHash);
 
     return NextResponse.json({ imageUrl: imageGatewayUrl });
-  } catch (e: any) {
+  } catch (e) {
     console.error("FATAL ERROR:", e);
-    return NextResponse.json({ error: e?.message || "Unknown error" }, { status: 500 });
+    return NextResponse.json({ 
+      error: e instanceof Error ? e.message : String(e) || "Unknown error" 
+    }, { status: 500 });
   }
 }

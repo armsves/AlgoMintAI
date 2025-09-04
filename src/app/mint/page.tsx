@@ -89,7 +89,6 @@ export default function MintNFT() {
         {
           headers: {
             Authorization: `Bearer ${PINATA_JWT}`,
-            ...metaForm instanceof window.FormData ? {} : metaForm.getHeaders?.(),
           },
         }
       );
